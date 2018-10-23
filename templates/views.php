@@ -108,6 +108,14 @@
         return $s;
     }
 
+    
+    // render_links_card -- Create a card with a collection of links
+    function render_links_card($title, $description, $links) {
+        $links = render_links($links);
+        return render_card($title,"<p>$description</p>$links");
+    }
+
+
     // render_link -- Create a hyperlink in HTML
     function render_link($text, $url) {
         return "<a href=\"$url\">$text</a>";
@@ -128,6 +136,12 @@
     // render_page -- Create one HTML page from a template.
     function render_page($settings) {
         return render_template("page.html", $settings);
+    }
+
+
+    // render_source_code -- Display the source code from a file
+    function render_source_code($path) {
+        return '<pre>' . htmlspecialchars(file_get_contents($path)) . '</pre>';
     }
 
     

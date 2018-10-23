@@ -1,7 +1,5 @@
 <?php
 
-    
-    // Start the page
     require_once 'views.php';
 
 
