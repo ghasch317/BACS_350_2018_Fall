@@ -4,11 +4,11 @@
 
 
     // Log the page load
-//    require_once 'log.php';
-//    $log->log_page("solution/27");
+    require_once 'log.php';
+    $log->log_page("solution/27");
 
-//    echo "solution/27  Cookie First: $_COOKIE[FIRST_TIME]";
-//    echo "solution/27  Cookie Shopping: $_COOKIE[SHOPPING]";
+    $log->log_page( "solution/27  Cookie First: $_COOKIE[FIRST_TIME]");
+    $log->log_page( "solution/27  Cookie Shopping: $_COOKIE[SHOPPING]");
 
 
     // -----------------------------
