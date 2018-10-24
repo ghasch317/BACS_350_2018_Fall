@@ -36,17 +36,18 @@
         return 'NOT First time';
         
     }
-//
-//    function show_buy_now() {
-//        return 'Buy Now.    Sign up now to make all of your dreams come true.  
-//            <a href="index.php?shopping=TRUE">BUY</a>';
-//    }
-//
-//    function show_shopping_cart() {
-//        return 'You Bought this.  <a href="index.php?shopping=FALSE">CANCEL</a>';
-//    }
-//
-//
+
+    function show_buy_now() {
+        return 'Buy Now.    Sign up now to make all of your dreams come true.  
+            <a href="index.php?shopping=TRUE">BUY</a>';
+    }
+
+    function show_shopping_cart() {
+        return 'You Bought this.  <a href="index.php?shopping=FALSE">CANCEL</a>';
+    }
+
+
+
     // Handle first time
     
 //    $before = "Before: Cookie = $_COOKIE[FIRST_TIME]";
@@ -60,28 +61,28 @@
         $message = show_not_first_time();
     }
     $content .= render_card ("Welcome",$message);
-//
-//
-//    // Handle Shopping Cart
-//
-//    $shopping = filter_input(INPUT_GET, 'shopping');
-//
-//    if ($shopping == 'TRUE') {
-//        session_start ();
-//        $_SESSION['SHOPPING'] = 'TRUE';
-//    }
-//    else {
-//        $_SESSION['SHOPPING'] = 'FALSE';
-//    }
-//
-//    if (isset($_SESSION['SHOPPING']) and $_SESSION['SHOPPING']=='TRUE') {
-//        $message =  show_shopping_cart();
-//    }
-//    else {
-//        $message =  show_buy_now();
-//    }
-//    $content .= render_card ("PURCHASE", $message);
-//    
+
+
+    // Handle Shopping Cart
+
+    $shopping = filter_input(INPUT_GET, 'shopping');
+
+    if ($shopping == 'TRUE') {
+        session_start ();
+        $_SESSION['SHOPPING'] = 'TRUE';
+    }
+    else {
+        $_SESSION['SHOPPING'] = 'FALSE';
+    }
+
+    if (isset($_SESSION['SHOPPING']) and $_SESSION['SHOPPING']=='TRUE') {
+        $message =  show_shopping_cart();
+    }
+    else {
+        $message =  show_buy_now();
+    }
+    $content .= render_card ("PURCHASE", $message);
+    
 //    $after = "After: Cookie = $_COOKIE[FIRST_TIME]";
 //    $status = render_card("Cookies", $before . $after);
 
