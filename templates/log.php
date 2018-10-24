@@ -105,7 +105,8 @@
             
                 <form action="' . $page . '" method="get">
                     <p><label>Text:</label> &nbsp; <input type="text" name="text"></p>
-                    <p><input type="submit" value="Log This"/></p>
+                    <input class="btn" type="submit" value="Log This"/>
+                    <button class="btn"><a href="pagelog.php?action=clear">Clear Log</a></button>
                     <input type="hidden" name="action" value="add">
                 </form>
             </div>

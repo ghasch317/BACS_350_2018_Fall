@@ -1,3 +1,7 @@
+/*
+    E L E M E N T S
+*/
+
 body {
     font-size: 18px;
     color: #0E3D65;
@@ -50,9 +54,25 @@ pre {
     background-color: #eeeeee;
 }
 
+
+/*
+    C L A S S E S
+*/
+
+.btn {
+    background-color: #F6B018;
+    border: 3px solid #0E3D65;
+    margin: 10px;
+    padding: 10px;
+    color: #0E3D65;
+    font-weight: 900;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
 .card {
     background-color: #ffffff;
-    border: 5px solid  #F6B018;
+    border: 5px solid #F6B018;
     box-shadow: 2px 2px 5px gray;
     padding: 20px;
     margin: 20px;
