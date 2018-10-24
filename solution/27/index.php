@@ -3,12 +3,21 @@
     require_once 'views.php';
 
 
-    // Log the page load
-    require_once 'log.php';
-    $log->log_page("solution/27");
+//    // Log the page load
+//    require_once 'log.php';
+//    $log->log_page("solution/27");
 
-    $log->log_page( "solution/27  Cookie First: $_COOKIE[FIRST_TIME]");
-    $log->log_page( "solution/27  Cookie Shopping: $_COOKIE[SHOPPING]");
+//    if (! isset($_COOKIE['FIRST_TIME'])) {
+//        $_COOKIE['FIRST_TIME'] = "FALSE");
+//    } 
+//        
+//
+//    if (! isset($_SESSION['SHOPPING'])) {
+//        $_SESSION['SHOPPING'] = 'FALSE';
+//    }
+//        
+//    $log->log_page( "solution/27  Cookie First: $_COOKIE[FIRST_TIME]");
+//    $log->log_page( "solution/27  Cookie Shopping: $_COOKIE[SHOPPING]");
 
 
     // -----------------------------
@@ -42,37 +51,37 @@
 
     $content = "<h1>Demo of Cookies and Sessions</h1>";
     
-    if (! isset($_COOKIE['FIRST_TIME']) or $_COOKIE['FIRST_TIME'] == "TRUE") {
-        $message = show_first_time();
-    }
-    else {
-        $message = show_not_first_time();
-    }
-    $content .= render_card ("Welcome",$message);
-
-
-    // Handle Shopping Cart
-
-    $shopping = filter_input(INPUT_GET, 'shopping');
-
-    if ($shopping == 'TRUE') {
-        session_start ();
-        $_SESSION['SHOPPING'] = 'TRUE';
-    }
-    else {
-        $_SESSION['SHOPPING'] = 'FALSE';
-    }
-
-    if (isset($_SESSION['SHOPPING']) and $_SESSION['SHOPPING']=='TRUE') {
-        $message =  show_shopping_cart();
-    }
-    else {
-        $message =  show_buy_now();
-    }
-    $content .= render_card ("PURCHASE", $message);
-    
-    $after = "After: Cookie = $_COOKIE[FIRST_TIME]";
-    $status = render_card("Cookies", $before . $after);
+//    if (! isset($_COOKIE['FIRST_TIME']) or $_COOKIE['FIRST_TIME'] == "TRUE") {
+//        $message = show_first_time();
+//    }
+//    else {
+//        $message = show_not_first_time();
+//    }
+//    $content .= render_card ("Welcome",$message);
+//
+//
+//    // Handle Shopping Cart
+//
+//    $shopping = filter_input(INPUT_GET, 'shopping');
+//
+//    if ($shopping == 'TRUE') {
+//        session_start ();
+//        $_SESSION['SHOPPING'] = 'TRUE';
+//    }
+//    else {
+//        $_SESSION['SHOPPING'] = 'FALSE';
+//    }
+//
+//    if (isset($_SESSION['SHOPPING']) and $_SESSION['SHOPPING']=='TRUE') {
+//        $message =  show_shopping_cart();
+//    }
+//    else {
+//        $message =  show_buy_now();
+//    }
+//    $content .= render_card ("PURCHASE", $message);
+//    
+//    $after = "After: Cookie = $_COOKIE[FIRST_TIME]";
+//    $status = render_card("Cookies", $before . $after);
 
 
 

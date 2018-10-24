@@ -89,7 +89,7 @@
     // Create main part of page content
     $settings = array(
         "site_title" => "BACS 350 Projects",
-        "page_title" => "Pro", 
+        "page_title" => "Error Handling Demos", 
         "style"      => 'style.css',
         "content"    => $content);
 
