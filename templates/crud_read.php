@@ -19,11 +19,21 @@
         $statement->execute();
         return $statement->fetchAll();
     }
-    
+
+    // render_table -- Create a bullet list in HTML
+    function subscriber_table($table) {
+        $s = '<table>';
+        foreach($table as $row) {
+            $s .= '<tr><td>' . implode('</td><td>', $row) . '</td></tr>';
+        }
+        $s .= '</table>';
+        return $s;
+    }
+
 
     // Display the page content
     
-    $list = render_table(query_subscribers ($db));
+    $list = subscriber_table(query_subscribers ($db));
     $link = '<div>' . render_link('CRUD', 'crud.php') . '</div>';
     $content = $link . render_card("Subscriber List", $list);
 
