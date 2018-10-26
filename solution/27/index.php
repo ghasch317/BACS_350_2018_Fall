@@ -7,19 +7,17 @@
     require_once 'log.php';
     $log->log_page("solution/27");
 
-    echo '<a href="pagelog.php">Page Log</a>';
-
     if (! isset($_COOKIE['FIRST_TIME'])) {
-        $_COOKIE['FIRST_TIME'] = "TRUE";
-    } 
-        
+        $_COOKIE['FIRST_TIME'] = "FALSE";
+    }
 
-//    if (! isset($_SESSION['SHOPPING'])) {
-//        $_SESSION['SHOPPING'] = 'FALSE';
-//    }
-        
-    $log->log_page( "solution/27  Cookie First: $_COOKIE[FIRST_TIME]");
-//    $log->log_page( "solution/27  Cookie Shopping: $_COOKIE[SHOPPING]");
+
+    if (! isset($_SESSION['SHOPPING'])) {
+        $_SESSION['SHOPPING'] = 'FALSE';
+    }
+
+    $log->log_page( "solution/27 Cookie First: $_COOKIE[FIRST_TIME]");
+    $log->log_page( "solution/27 Cookie Shopping: $_SESSION[SHOPPING]");
 
 
     // -----------------------------
@@ -32,7 +30,7 @@
     }
 
     function show_not_first_time() {
-//        setcookie ('FIRST_TIME', 'TRUE');
+        setcookie ('FIRST_TIME', 'TRUE');
         return 'NOT First time';
         
     }
@@ -47,14 +45,13 @@
     }
 
 
-
     // Handle first time
     
-//    $before = "Before: Cookie = $_COOKIE[FIRST_TIME]";
+    $before = "Before: Cookie = $_COOKIE[FIRST_TIME]";
 
     $content = "<h1>Demo of Cookies and Sessions</h1>";
     
-    if ($_COOKIE['FIRST_TIME'] == "TRUE") {
+    if (! isset($_COOKIE['FIRST_TIME']) or $_COOKIE['FIRST_TIME'] == "TRUE") {
         $message = show_first_time();
     }
     else {
@@ -82,11 +79,11 @@
         $message =  show_buy_now();
     }
     $content .= render_card ("PURCHASE", $message);
-    
+//    
 //    $after = "After: Cookie = $_COOKIE[FIRST_TIME]";
 //    $status = render_card("Cookies", $before . $after);
 
-//    $content = 'none';
+
 
     // Create main part of page content
     $settings = array(
