@@ -58,7 +58,7 @@
         $statement->execute();
         $statement->closeCursor();
         
-        header('Location: crud_read.php');
+        header('Location: index.php');
     }
  
 
