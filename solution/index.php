@@ -101,6 +101,12 @@
              <li>
                 <a href="27">27. Cookies and Sessions </a> - Use the browser to store values
             </li>
+            <li>
+                <a href="28">28. CRUD App </a> - All four crud operations in one page
+            </li>
+            <li>
+                <a href="29">29. Data App </a> - Object encapsulation of operations
+            </li>
         </ul>
     ';
 

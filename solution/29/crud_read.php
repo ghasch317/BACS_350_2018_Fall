@@ -26,10 +26,7 @@
         $s = '<table>';
         $s .= '<tr><th>Name</th><th>Email</th></tr>';
         foreach($table as $row) {
-            $edit = render_link($row[1], "crud_update.php?id=$row[0]");
-            $email = $row[2];
-            $delete = render_link("delete", "crud_delete.php?id=$row[0]&action=delete");
-            $row = array($edit, $email, $delete);
+            $row = array(render_link($row[1], "crud_update.php?id=$row[0]"), $row[2]);
             $s .= '<tr><td>' . implode('</td><td>', $row) . '</td></tr>';
         }
         $s .= '</table>';
