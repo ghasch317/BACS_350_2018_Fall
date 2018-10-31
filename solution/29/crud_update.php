@@ -9,24 +9,9 @@
     // Controller to add record
 
     $content = 'No action given';
-
-
-    // Show edit form
-    $action = filter_input(INPUT_GET, 'action');
-    $id = filter_input(INPUT_GET, 'id');
-    if ($action == 'edit' and ! empty($id)) {
-        // Find Data Record
-        $record = $subscribers->get($id);
-        $content = $subscribers->edit_view($record);
-    }
-    
-
-    // Modify Database Record
-    $action = filter_input(INPUT_POST, 'action');
-    if ($action == 'update') {
-        $subscribers->edit_view($record);
-    }
    
+    $content = $subscribers->handle_actions();
+    
 
     // Create main part of page content
     $settings = array(
