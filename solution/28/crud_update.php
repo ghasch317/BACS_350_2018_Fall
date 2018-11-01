@@ -30,7 +30,7 @@
                     <p><label>Name:</label> &nbsp; <input type="text" name="name" value="' . $name . '"></p>
                     <p><label>Email:</label> &nbsp; <input type="text" name="email" value="' . $email . '"></p>
                     <p><input type="submit" value="Save Record"/></p>
-                    <input type="hidden" name="action" value="edit">
+                    <input type="hidden" name="action" value="update">
                     <input type="hidden" name="id" value="' . $id . '">
                 </form>
             </div>
@@ -39,12 +39,12 @@
 
 
     // Update the database
-    function edit_subscriber() {
+    function update_subscriber() {
         $id    = filter_input(INPUT_POST, 'id');
         $name  = filter_input(INPUT_POST, 'name');
         $email = filter_input(INPUT_POST, 'email');
         
-        echo "edit: $name $email";
+        //echo "edit: $name $email";
 
         // Modify database row
         $query = "UPDATE subscribers SET name = :name, email = :email WHERE id = :id";
@@ -76,8 +76,8 @@
     
     // Modify Database Record
     $action = filter_input(INPUT_POST, 'action');
-    if ($action == 'edit') {
-        edit_subscriber();
+    if ($action == 'update') {
+        update_subscriber();
     }
    
 
