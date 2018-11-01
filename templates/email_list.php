@@ -15,7 +15,7 @@
     */
 
     require_once 'log.php';
-//    require_once 'subscriber.php';
+    require_once 'subscriber-add-only.php';
     require_once 'views.php';
 
 
@@ -26,13 +26,14 @@
     $content .= render_button('Show Log', 'pagelog.php');
 
 
-//    // Display the page content
-//    $content .= $subscribers->handle_actions();
+    // Display the page content
+    $content .= $subscribers->handle_actions();
 
     // Create main part of page content
     $settings = array(
         "site_title" => "BACS 350 - Demo Server",
         "page_title" => "Subscriber List", 
+        'logo'       => 'Bear.png',
         "style"      => 'style.css',
         "content"    => $content);
 
