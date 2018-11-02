@@ -10,20 +10,18 @@
 
 
     // Display the page content
-    
-    $list = $subscribers->show_list();
-    $content = render_card("Subscribers", $list);
+    $content = render_button('Show Log', 'pagelog.php');
+    $content .= $subscribers->handle_actions();
 
 
     // Create main part of page content
     $settings = array(
         "site_title" => "Email Manager",
-        "page_title" => "Demo of CRUD Logic", 
+        "page_title" => "Demo of Data App", 
+        "logo"       => "Bear.png",
         "style"      => 'style.css',
         "content"    => $content);
 
     echo render_page($settings);
-
-
 
 ?>
