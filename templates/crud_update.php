@@ -44,8 +44,6 @@
         $name  = filter_input(INPUT_POST, 'name');
         $email = filter_input(INPUT_POST, 'email');
         
-        echo "edit: $name $email";
-
         // Modify database row
         $query = "UPDATE subscribers SET name = :name, email = :email WHERE id = :id";
         global $db;

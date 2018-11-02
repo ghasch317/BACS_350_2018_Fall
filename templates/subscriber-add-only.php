@@ -40,53 +40,6 @@
     }
 
 
-    // Delete Database Record
-    function delete_subscriber($db, $id) {
-        $action = filter_input(INPUT_GET, 'action');
-        $id = filter_input(INPUT_GET, 'id');
-        if ($action == 'delete' and !empty($id)) {
-            $query = "DELETE from subscribers WHERE id = :id";
-            $statement = $db->prepare($query);
-            $statement->bindValue(':id', $id);
-            $statement->execute();
-            $statement->closeCursor();
-        }
-        header('Location: email_list.php');
-    }
-    
-
-    // Show form for adding a record
-    function edit_subscriber_view($record) {
-        $id    = $record['id'];
-        $name  = $record['name'];
-        $email = $record['email'];
-        return '
-            <div class="card">
-                <h3>Edit Subscriber</h3>
-                <form action="email_list.php" method="post">
-                    <p><label>Name:</label> &nbsp; <input type="text" name="name" value="' . $name . '"></p>
-                    <p><label>Email:</label> &nbsp; <input type="text" name="email" value="' . $email . '"></p>
-                    <p><input type="submit" value="Save Record"/></p>
-                    <input type="hidden" name="action" value="update">
-                    <input type="hidden" name="id" value="' . $id . '">
-                </form>
-            </div>
-        ';
-    }
-
-
-    // Lookup Record using ID
-    function get_subscriber($db, $id) {
-        $query = "SELECT * FROM subscribers WHERE id = :id";
-        $statement = $db->prepare($query);
-        $statement->bindValue(':id', $id);
-        $statement->execute();
-        $record = $statement->fetch();
-        $statement->closeCursor();
-        return $record;
-    }
-
-
     // Handle all action verbs
     function handle_actions() {
         $id = filter_input(INPUT_GET, 'id');
@@ -99,10 +52,7 @@
             $log->log('Subscriber CREATE');                    // CREATE
             $subscribers->add();
         }
-        if ($action == 'update') {
-            $log->log('Subscriber UPDATE');                    // UPDATE
-            $subscribers->update();
-        }
+        
 
         // GET
         $action = filter_input(INPUT_GET, 'action');
@@ -113,18 +63,6 @@
        if ($action == 'add') {
             $log->log('Subscriber Add View');
             return $subscribers->add_view();
-        }
-        if ($action == 'clear') {
-            $log->log('Subscriber DELETE ALL');
-            return $subscribers->clear();
-        }
-        if ($action == 'delete') {
-            $log->log('Subscriber DELETE');                    // DELETE
-            return $subscribers->delete($id);
-        }
-        if ($action == 'edit' and ! empty($id)) {
-            $log->log('Subscriber Edit View');
-            return $subscribers->edit_view($id);
         }
     }
        
@@ -144,10 +82,7 @@
         $s .= '<table>';
         $s .= '<tr><th>Name</th><th>Email</th></tr>';
         foreach($table as $row) {
-            $edit = render_link($row[1], "email_list.php?id=$row[0]&action=edit");
-            $email = $row[2];
-            $delete = render_link("delete", "email_list.php?id=$row[0]&action=delete");
-            $row = array($edit, $email, $delete);
+            $row = array("$row[0]. $row[1]", $row[2]);
             $s .= '<tr><td>' . implode('</td><td>', $row) . '</td></tr>';
         }
         $s .= '</table>';
@@ -155,28 +90,6 @@
         return $s;
     }
 
-
-    // Update the database
-    function update_subscriber () {
-        $id    = filter_input(INPUT_POST, 'id');
-        $name  = filter_input(INPUT_POST, 'name');
-        $email = filter_input(INPUT_POST, 'email');
-        
-        // Modify database row
-        $query = "UPDATE subscribers SET name = :name, email = :email WHERE id = :id";
-        global $db;
-        $statement = $db->prepare($query);
-
-        $statement->bindValue(':id', $id);
-        $statement->bindValue(':name', $name);
-        $statement->bindValue(':email', $email);
-
-        $statement->execute();
-        $statement->closeCursor();
-        
-        header('Location: email_list.php');
-    }
- 
 
     /* -------------------------------------------------------------
     
@@ -208,23 +121,6 @@
             return query_subscribers($this->db);
         }
         
-    
-        function clear() {
-            return clear_subscribers($this->db);
-        }
-        
-        function delete() {
-            delete_subscriber($this->db, $id);
-        }
-        
-        function get($id) {
-            return get_subscriber($this->db, $id);
-        }
-        
-        function update() {
-            update_subscriber();
-        }
-        
         
         // Views
         
@@ -234,10 +130,6 @@
         
         function add_view() {
             return add_subscriber_view();
-        }
-        
-        function edit_view($id) {
-            return edit_subscriber_view($this->get($id));
         }
         
         function list_view() {

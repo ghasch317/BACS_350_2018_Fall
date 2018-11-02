@@ -135,6 +135,9 @@
     
     // render_page -- Create one HTML page from a template.
     function render_page($settings) {
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        header("Cache-Control: no-store, no-cache, must-revalidate");
         return render_template("page.html", $settings);
     }
 
