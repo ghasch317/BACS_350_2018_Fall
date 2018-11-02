@@ -40,7 +40,8 @@
         // Show if insert is successful or not
         try {
             // Create a string for "now"
-            $date = date('Y-m-d g:i a');
+            date_default_timezone_set("America/Denver");
+            $date = date('Y-m-d g:i:s a');
             
             // Add database row
             $query = "INSERT INTO log (date, text) VALUES (:date, :text);";
