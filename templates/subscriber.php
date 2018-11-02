@@ -4,6 +4,8 @@
     require_once 'db.php';
     require_once 'log.php';
 
+    $page = 'email_list.php';
+
 
     // Add a new record
     function add_subscriber($db) {
@@ -16,7 +18,8 @@
             $statement->bindValue(':email', $email);
             $statement->execute();
             $statement->closeCursor();
-            header('Location: email_list.php');
+            global $page;
+            header("Location: $page");
         } catch (PDOException $e) {
             $error_message = $e->getMessage();
             echo "<p>Error: $error_message</p>";
@@ -26,10 +29,11 @@
 
     // Show form for adding a record
     function add_subscriber_view() {
+        global $page;
         return '
             <div class="card">
                 <h3>Add Subscriber</h3>
-                <form action="email_list.php" method="post">
+                <form action="' . $page . '" method="post">
                     <p><label>Name:</label> &nbsp; <input type="text" name="name"></p>
                     <p><label>Email:</label> &nbsp; <input type="text" name="email"></p>
                     <p><input type="submit" value="Sign Up"/></p>
@@ -51,7 +55,8 @@
             $statement->execute();
             $statement->closeCursor();
         }
-        header('Location: email_list.php');
+        global $page;
+        header("Location: $page");
     }
     
 
@@ -60,10 +65,11 @@
         $id    = $record['id'];
         $name  = $record['name'];
         $email = $record['email'];
+        global $page;
         return '
             <div class="card">
                 <h3>Edit Subscriber</h3>
-                <form action="email_list.php" method="post">
+                <form action="' . $page . '" method="post">
                     <p><label>Name:</label> &nbsp; <input type="text" name="name" value="' . $name . '"></p>
                     <p><label>Email:</label> &nbsp; <input type="text" name="email" value="' . $email . '"></p>
                     <p><input type="submit" value="Save Record"/></p>
@@ -140,13 +146,14 @@
 
     // render_table -- Create a bullet list in HTML
     function subscriber_list_view ($table) {
-        $s = render_button('Add Subscriber', 'email_list.php?action=add') . '<br><br>';
+        global $page;
+        $s = render_button('Add Subscriber', "$page?action=add") . '<br><br>';
         $s .= '<table>';
         $s .= '<tr><th>Name</th><th>Email</th></tr>';
         foreach($table as $row) {
-            $edit = render_link($row[1], "email_list.php?id=$row[0]&action=edit");
+            $edit = render_link($row[1], "$page?id=$row[0]&action=edit");
             $email = $row[2];
-            $delete = render_link("delete", "email_list.php?id=$row[0]&action=delete");
+            $delete = render_link("delete", "$page?id=$row[0]&action=delete");
             $row = array($edit, $email, $delete);
             $s .= '<tr><td>' . implode('</td><td>', $row) . '</td></tr>';
         }
@@ -157,14 +164,13 @@
 
 
     // Update the database
-    function update_subscriber () {
+    function update_subscriber ($db) {
         $id    = filter_input(INPUT_POST, 'id');
         $name  = filter_input(INPUT_POST, 'name');
         $email = filter_input(INPUT_POST, 'email');
         
         // Modify database row
         $query = "UPDATE subscribers SET name = :name, email = :email WHERE id = :id";
-        global $db;
         $statement = $db->prepare($query);
 
         $statement->bindValue(':id', $id);
@@ -174,7 +180,8 @@
         $statement->execute();
         $statement->closeCursor();
         
-        header('Location: email_list.php');
+        global $page;
+        header("Location: $page");
     }
  
 
@@ -200,7 +207,7 @@
         
         // CRUD
         
-        function add($name, $email) {
+        function add() {
             return add_subscriber ($this->db);
         }
         
@@ -222,7 +229,7 @@
         }
         
         function update() {
-            update_subscriber();
+            update_subscriber($this->db);
         }
         
         
