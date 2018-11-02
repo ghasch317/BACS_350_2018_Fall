@@ -23,6 +23,7 @@
     echo render_page($settings);
     echo '<p><a href="pagelog.php">Page log</a></p>';
     echo '<p><a href="addalbum.php">Add Album</a></p>';
+    echo '<p><a href="editalbum_crud.php">Edit Album</a></p>';
 
     $album->show_album();
 
