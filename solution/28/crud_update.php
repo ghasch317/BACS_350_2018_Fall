@@ -1,8 +1,6 @@
 <?php
 
     require_once 'views.php';
-
-    // Connect to the database
     require_once 'db.php';
 
 
@@ -58,7 +56,7 @@
         $statement->execute();
         $statement->closeCursor();
         
-        header('Location: crud_read.php');
+        header('Location: index.php');
     }
  
 
