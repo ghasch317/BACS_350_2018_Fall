@@ -1,0 +1,8 @@
+[27-Oct-2018 15:58:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function db_connect() in /home1/anielhe3/public_html/project/Exam2/logdb.php:26
+Stack trace:
+#0 /home1/anielhe3/public_html/project/Exam2/logdb.php(69): remote_connect2()
+#1 /home1/anielhe3/public_html/project/Exam2/log.php(161): connect_database2()
+#2 /home1/anielhe3/public_html/project/Exam2/log.php(205): Log->__construct()
+#3 /home1/anielhe3/public_html/project/Exam2/pagelog.php(16): require_once('/home1/anielhe3...')
+#4 {main}
+  thrown in /home1/anielhe3/public_html/project/Exam2/logdb.php on line 26
