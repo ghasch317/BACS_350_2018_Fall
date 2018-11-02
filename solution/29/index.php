@@ -7,9 +7,10 @@
 
     // Log the page load
     $log->log_page();
-    $content = render_button('Show Log', 'pagelog.php');
+
 
     // Display the page content
+    $content = render_button('Show Log', 'pagelog.php');
     $content .= $subscribers->handle_actions();
 
 
@@ -17,6 +18,7 @@
     $settings = array(
         "site_title" => "Email Manager",
         "page_title" => "Demo of Data App", 
+        "logo"       => "Bear.png",
         "style"      => 'style.css',
         "content"    => $content);
 

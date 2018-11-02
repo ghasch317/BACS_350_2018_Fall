@@ -157,14 +157,13 @@
 
 
     // Update the database
-    function update_subscriber () {
+    function update_subscriber ($db) {
         $id    = filter_input(INPUT_POST, 'id');
         $name  = filter_input(INPUT_POST, 'name');
         $email = filter_input(INPUT_POST, 'email');
         
         // Modify database row
         $query = "UPDATE subscribers SET name = :name, email = :email WHERE id = :id";
-        global $db;
         $statement = $db->prepare($query);
 
         $statement->bindValue(':id', $id);
@@ -200,7 +199,7 @@
         
         // CRUD
         
-        function add($name, $email) {
+        function add() {
             return add_subscriber ($this->db);
         }
         
@@ -222,7 +221,7 @@
         }
         
         function update() {
-            update_subscriber();
+            update_subscriber($this->db);
         }
         
         
