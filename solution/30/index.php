@@ -11,6 +11,7 @@
     // Set the password into the administrator table
     function register_user($db, $email, $password, $first, $last) {
         
+        $log->log("$email, $first, $last");
         $hash = password_hash($password, PASSWORD_DEFAULT);
         
         $query = 'INSERT INTO administrators (email, password, firstName, lastName) 
@@ -36,9 +37,11 @@
         $valid_password = is_valid_login ($db, $email, $password);
         
         if ($valid_password) {
+            $log->log("User Verified: $email");
             $content .= '<p>Is Valid</p>';
         }
         else {
+            $log->log("Bad user login: $email");
             $content .= '<p>NOT Valid</p>';
         }
         return $content;
@@ -56,6 +59,7 @@
         $row = $statement->fetch();
         $statement->closeCursor();
         $hash = $row['password'];
+        $log->log("User login check: $email, $hash");
         return password_verify($password, $hash);
         
     }
