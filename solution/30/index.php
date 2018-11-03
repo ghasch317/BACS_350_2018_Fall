@@ -7,31 +7,49 @@
     // Log the page load
     $log->log_page();
 
+    
+    // Set the password into the administrator table
+    function register_user($email, $password, $first, $last) {
+        
+        global $db;
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        
+        $query = 'INSERT INTO administrators VALUES (email, password, firstName, lastName) 
+            VALUES (:email, :password, :first, :last)';
+        
+        $statement = $db->prepare($query);
+        
+        $statement->bindValue(':email', $email);
+        $statement->bindValue(':password', $password);
+        $statement->bindValue(':first', $first);
+        $statement->bindValue(':last', $last);
+        
+        $statement->execute();
+        $statement->closeCursor();
+    
+    }
 
-    // Display the page content
-    $content = render_button('Show Log', 'pagelog.php');
 
-//    function verify_password_setup() {
-//        $email = "me@here.com";
-//        $password = 'Rock on dude!';
-//        $hash = password_hash($password, PASSWORD_DEFAULT);
-//        $content = "<p>User: $email</p><p>Password: $password</p><p>Hash: $hash</p>";
-//
-//        $valid_password = password_verify($password, $hash);
-//        if ($valid_password) {
-//            $content .= '<p>Is Valid</p>';
-//        }
-//        else {
-//            $content .= '<p>NOT Valid</p>';
-//        }
-//        return $content;
-//    }
-    // $content .= verify_password_setup();
-
+    // Display if password is valid or not
+    function show_valid ($email, $password) {
+        
+        $content = "<p>User: $email</p><p>Password: $password</p><p>Hash: $hash</p>";
+        $valid_password = is_valid_login ($email, $password);
+        
+        if ($valid_password) {
+            $content .= '<p>Is Valid</p>';
+        }
+        else {
+            $content .= '<p>NOT Valid</p>';
+        }
+        return $content;
+        
+    }
 
 
     // Check to see that the password in OK
     function is_valid_login ($email, $password) {
+        
         global $db;
         $query = 'SELECT password FROM administrators WHERE email=:email';
         $statement = $db->prepare($query);
@@ -41,19 +59,21 @@
         $statement->closeCursor();
         $hash = $row['password'];
         return password_verify($password, $hash);
+        
     }
 
+
     // Try this login
-    $email = "me@here.com";
+
+    $email = "me2@here.com";
     $password = 'Rock on dude!';
-    $valid_password = is_valid_login ($email, $password);
- 
-    if ($valid_password) {
-        $content .= '<p>Is Valid</p>';
-    }
-    else {
-        $content .= "<p>Password is NOT Valid</p>" . "<p>User: $email</p><p>Password: $password</p>";
-    }
+
+    register_user($email, $password, 'Test', 'Robot');
+        
+
+    // Display the page content
+    $content = render_button('Show Log', 'pagelog.php');
+    $content .= show_valid ($email, $password);
 
 
     // Create main part of page content

@@ -20,6 +20,7 @@
     $settings = array(
         "site_title" => "BACS 350 Projects",
         "page_title" => "Date and TimeZone", 
+        "logo"       => 'Bear.png',
         "style"      => 'style.css',
         "content"    => $content);
 
