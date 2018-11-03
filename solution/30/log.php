@@ -153,8 +153,8 @@
         // Database connection
         private $db;
 
-        function __construct() {
-            $this->db =  connect_database();
+        function __construct($db) {
+            $this->db =  $db;
         }
 
         
@@ -204,6 +204,6 @@
 
 
     // Create a list object and connect to the database
-    $log = new Log;
+    $log = new Log($db);
 
 ?>

@@ -9,9 +9,8 @@
 
     
     // Set the password into the administrator table
-    function register_user($email, $password, $first, $last) {
+    function register_user($db, $email, $password, $first, $last) {
         
-        global $db;
         $hash = password_hash($password, PASSWORD_DEFAULT);
         
         $query = 'INSERT INTO administrators VALUES (email, password, firstName, lastName) 
@@ -31,10 +30,10 @@
 
 
     // Display if password is valid or not
-    function show_valid ($email, $password) {
+    function show_valid ($db, $email, $password) {
         
         $content = "<p>User: $email</p><p>Password: $password</p><p>Hash: $hash</p>";
-        $valid_password = is_valid_login ($email, $password);
+        $valid_password = is_valid_login ($db, $email, $password);
         
         if ($valid_password) {
             $content .= '<p>Is Valid</p>';
@@ -48,9 +47,8 @@
 
 
     // Check to see that the password in OK
-    function is_valid_login ($email, $password) {
+    function is_valid_login ($db, $email, $password) {
         
-        global $db;
         $query = 'SELECT password FROM administrators WHERE email=:email';
         $statement = $db->prepare($query);
         $statement->bindValue(':email', $email);
@@ -68,12 +66,12 @@
     $email = "me2@here.com";
     $password = 'Rock on dude!';
 
-    register_user($email, $password, 'Test', 'Robot');
+    register_user($db, $email, $password, 'Test', 'Robot');
         
 
     // Display the page content
     $content = render_button('Show Log', 'pagelog.php');
-    $content .= show_valid ($email, $password);
+    $content .= show_valid ($db, $email, $password);
 
 
     // Create main part of page content
