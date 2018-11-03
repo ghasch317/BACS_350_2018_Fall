@@ -40,6 +40,7 @@
         // Show if insert is successful or not
         try {
             // Create a string for "now"
+            date_default_timezone_set("America/Denver");
             $date = date('Y-m-d g:i a');
             
             // Add database row
