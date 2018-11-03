@@ -11,6 +11,7 @@
     // Set the password into the administrator table
     function register_user($db, $email, $password, $first, $last) {
         
+        global $log;
         $log->log("$email, $first, $last");
         $hash = password_hash($password, PASSWORD_DEFAULT);
         
@@ -33,6 +34,7 @@
     // Display if password is valid or not
     function show_valid ($db, $email, $password) {
         
+        global $log;
         $content = "<p>User: $email</p><p>Password: $password</p><p>Hash: $hash</p>";
         $valid_password = is_valid_login ($db, $email, $password);
         
@@ -52,6 +54,7 @@
     // Check to see that the password in OK
     function is_valid_login ($db, $email, $password) {
         
+        global $log;
         $query = 'SELECT password FROM administrators WHERE email=:email';
         $statement = $db->prepare($query);
         $statement->bindValue(':email', $email);
