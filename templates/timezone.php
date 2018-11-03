@@ -7,6 +7,7 @@
     require_once 'log.php';
     $log->log_page();
 
+    date_default_timezone_set("Europe/London");
     $content = 'GMT is <h1>' . date('Y-m-d g:i a') . '</h1>';
 
     // Demostrate Local Time formatting
