@@ -7,10 +7,12 @@
     require_once 'log.php';
     $log->log_page();
 
+    $content = 'GMT is <h1>' . date('Y-m-d g:i a') . '</h1>';
 
     // Demostrate Local Time formatting
     date_default_timezone_set("America/Denver");
-    $content = 'Time Now is ' . date('Y-m-d g:i a');
+    $content = 'Time Now is <h1>' . date('Y-m-d g:i a') . '</h1>';
+
 
 
     // Create main part of page content
