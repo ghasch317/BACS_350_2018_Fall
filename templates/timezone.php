@@ -11,7 +11,7 @@
 
     // Demostrate Local Time formatting
     date_default_timezone_set("America/Denver");
-    $content = 'Time Now is <h1>' . date('Y-m-d g:i a') . '</h1>';
+    $content .= 'Time Now is <h1>' . date('Y-m-d g:i a') . '</h1>';
 
 
 
