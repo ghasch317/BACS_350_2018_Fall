@@ -13,13 +13,11 @@
         
         $hash = password_hash($password, PASSWORD_DEFAULT);
         
-        $query = 'INSERT INTO administrators VALUES (email, password, firstName, lastName) 
-            VALUES (:id, :email, :password, :first, :last)';
+        $query = 'INSERT INTO administrators (email, password, firstName, lastName) 
+            VALUES (:email, :password, :first, :last);';
         
         $statement = $db->prepare($query);
         
-        $id = 2;
-        $statement->bindValue(':id', $id);
         $statement->bindValue(':email', $email);
         $statement->bindValue(':password', $password);
         $statement->bindValue(':first', $first);
