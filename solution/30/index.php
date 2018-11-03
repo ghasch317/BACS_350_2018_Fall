@@ -63,10 +63,10 @@
 
     // Try this login
 
-    $email = "me3@here.com";
+    $email = "me@here.com";
     $password = 'Rock on dude!';
 
-    register_user($db, $email, $password, 'Test', 'Robot');
+//    register_user($db, $email, $password, 'Test', 'Robot');
         
 
     // Display the page content
