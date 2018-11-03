@@ -16,7 +16,7 @@
     function remote_connect() {
 
         $port = '3306';
-        $dbname = 'uncobacs_administrators';
+        $dbname = 'uncobacs_subscribers';
         $db_connect = "mysql:host=localhost:$port;dbname=$dbname";
         $username = 'uncobacs_350';
         $password = 'BACS_350';
