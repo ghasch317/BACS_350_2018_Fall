@@ -43,8 +43,9 @@
     $title = 'Logging and Error Handling';
     $text= "Demonstrate how to perform each CRUD operation (both view and data)";
     $links = array(
-        "Page Load Logging" => "https://seamansguide.com/guide/PhpApps/templates/log.php",
-        "History of Pages" => "https://seamansguide.com/guide/PhpApps/templates/pagelog.php",
+        "Page Load Logging" => "view_source.php?path=log.php",
+        "History of Pages" => "pagelog.php",
+        'Local Time'        => 'timezone.php',
     );
     $content .= render_links_card($title, $text, $links);
 
