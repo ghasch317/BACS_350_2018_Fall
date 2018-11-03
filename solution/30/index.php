@@ -19,7 +19,7 @@
         $statement = $db->prepare($query);
         
         $statement->bindValue(':email', $email);
-        $statement->bindValue(':password', $password);
+        $statement->bindValue(':password', $hash);
         $statement->bindValue(':first', $first);
         $statement->bindValue(':last', $last);
         
@@ -63,7 +63,7 @@
 
     // Try this login
 
-    $email = "me2@here.com";
+    $email = "me3@here.com";
     $password = 'Rock on dude!';
 
     register_user($db, $email, $password, 'Test', 'Robot');
