@@ -1,13 +1,25 @@
 <?php
 
+/*
+    General database connection.  This design works for either local or remote
+    database connections.  It automatically determines which is needed at 
+    execution time.
+    
+    Usage:
+        require_once 'db.php';
+        $db = connect_database();
+        
+*/
+
+
     // Connect to the remote database
     function remote_connect() {
 
         $port = '3306';
-        $dbname = 'anielhe3_music';
+        $dbname = 'ghaschba_subscribers';
         $db_connect = "mysql:host=localhost:$port;dbname=$dbname";
-        $username = 'anielhe3';
-        $password = '3Spookie5Me!';
+        $username = 'ghaschba_350';
+        $password = 'Winogrd123!!';
         return db_connect($db_connect, $username, $password);
 
     }
@@ -17,10 +29,10 @@
     function local_connect() {
 
         $host = 'localhost';
-        $dbname = 'music';
+        $dbname = 'bacs350';
         $username = 'root';
         $password = '';
-        $db_connect = "mysql:host=localhost;dbname=$dbname";
+        $db_connect = "mysql:host=$host;dbname=$dbname";
         return db_connect($db_connect, $username, $password);
 
     }
@@ -29,10 +41,11 @@
     // Open the database or die
     function db_connect($db_connect, $username, $password) {
         
-//        echo "<h2>DB Connection</h2><p>Connect String:  $db_connect, $username, $password</p>";
+        // Enable these echo statements to debug the connection.
+        //  echo "<h2>DB Connection</h2><p>Connect String:  $db_connect, $username, $password</p>";
         try {
             $db = new PDO($db_connect, $username, $password);
-//             echo '<p><b>Successful Connection</b></p>';
+            // echo '<p><b>Successful Connection</b></p>';
             return $db;
         } catch (PDOException $e) {
             $error_message = $e->getMessage();
@@ -44,7 +57,7 @@
 
 
     // Open the database or die
-    function album_connect() {
+    function connect_database() {
         
         $local = ($_SERVER['SERVER_NAME'] == 'localhost');
         if ($local) {
@@ -55,5 +68,9 @@
         }
         
     }
+
+    // Create a connection
+
+    $db = connect_database();
 
 ?>
