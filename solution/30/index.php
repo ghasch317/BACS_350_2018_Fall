@@ -2,83 +2,28 @@
     
     require_once 'log.php';
     require_once 'views.php';
+    require_once 'auth.php';
 
 
     // Log the page load
     $log->log_page();
 
-    
-    // Set the password into the administrator table
-    function register_user($db, $email, $password, $first, $last) {
-        
-        global $log;
-        $log->log("$email, $first, $last");
-        $hash = password_hash($password, PASSWORD_DEFAULT);
-        
-        $query = 'INSERT INTO administrators (email, password, firstName, lastName) 
-            VALUES (:email, :password, :first, :last);';
-        
-        $statement = $db->prepare($query);
-        
-        $statement->bindValue(':email', $email);
-        $statement->bindValue(':password', $hash);
-        $statement->bindValue(':first', $first);
-        $statement->bindValue(':last', $last);
-        
-        $statement->execute();
-        $statement->closeCursor();
-    
-    }
 
-
-    // Display if password is valid or not
-    function show_valid ($db, $email, $password) {
-        
-        global $log;
-        $content = "<p>User: $email</p><p>Password: $password</p><p>Hash: $hash</p>";
-        $valid_password = is_valid_login ($db, $email, $password);
-        
-        if ($valid_password) {
-            $log->log("User Verified: $email");
-            $content .= '<p>Is Valid</p>';
-        }
-        else {
-            $log->log("Bad user login: $email");
-            $content .= '<p>NOT Valid</p>';
-        }
-        return $content;
-        
-    }
-
-
-    // Check to see that the password in OK
-    function is_valid_login ($db, $email, $password) {
-        
-        global $log;
-        $query = 'SELECT password FROM administrators WHERE email=:email';
-        $statement = $db->prepare($query);
-        $statement->bindValue(':email', $email);
-        $statement->execute();
-        $row = $statement->fetch();
-        $statement->closeCursor();
-        $hash = $row['password'];
-        $log->log("User login check: $email, $hash");
-        return password_verify($password, $hash);
-        
-    }
-
+    // Display the page content
+    $content = render_button('Templates', '../../templates');
+    $content .= render_button('Solutions', '..');
+    $content .= render_button('Show Log', 'pagelog.php');
 
     // Try this login
 
     $email = "me@here.com";
     $password = 'Rock on dude!';
 
-//    register_user($db, $email, $password, 'Test', 'Robot');
+    // User Setup:
+    // require_once 'db.php';
+    // register_user($db, $email, $password, 'New', 'User');
         
-
-    // Display the page content
-    $content = render_button('Show Log', 'pagelog.php');
-    $content .= show_valid ($db, $email, $password);
+    $content .= $auth->show_valid ($email, $password);
 
 
     // Create main part of page content
