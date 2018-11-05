@@ -24,7 +24,10 @@
         $s .= '<table>';
         $s .= '<tr><th>Name</th><th>Email</th></tr>';
         foreach($table as $row) {
-            $row = array(render_link($row[1], "crud_update.php?id=$row[0]"), $row[2]);
+            $edit = render_link($row[1], "crud_update.php?id=$row[0]");
+            $email = $row[2];
+            $delete = render_link("delete", "crud_delete.php?id=$row[0]&action=delete");
+            $row = array($edit, $email, $delete);
             $s .= '<tr><td>' . implode('</td><td>', $row) . '</td></tr>';
         }
         $s .= '</table>';
@@ -34,21 +37,23 @@
 
 
     // Display the page content
-    
+
+    $content = render_button('Templates', '../../templates');
+    $content .= render_button('Solutions', '..');
+    $content .= render_button('Show Log', 'pagelog.php');
+
+    // Show subscriber list
     $list = subscriber_list(query_subscribers ($db));
-    
-    $content = render_card("Subscriber List", $list);
+    $content .= render_card("Subscribers", $list);
 
 
     // Create main part of page content
     $settings = array(
-        "site_title" => "Subscriber List Manager",
-        "page_title" => "Demo of CRUD", 
+        "site_title" => "Email Manager",
+        "page_title" => "Demo of CRUD Logic", 
         "style"      => 'style.css',
         "content"    => $content);
 
     echo render_page($settings);
-
-
 
 ?>

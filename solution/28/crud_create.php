@@ -39,7 +39,7 @@
             $statement->bindValue(':email', $email);
             $statement->execute();
             $statement->closeCursor();
-            header('Location: crud.php');
+            header('Location: index.php');
         } catch (PDOException $e) {
             $error_message = $e->getMessage();
             echo "<p>Error: $error_message</p>";

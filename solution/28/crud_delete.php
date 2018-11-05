@@ -4,18 +4,21 @@
     require_once 'db.php';
 
 
-    echo '<h2>Delete Test User</h2>';
+    // Modify Database Record
+    $action = filter_input(INPUT_GET, 'action');
+    $id = filter_input(INPUT_GET, 'id');
+    if ($action == 'delete' and !empty($id)) {
 
+        // Delete database row
+        $query = "DELETE from subscribers WHERE id = :id";
 
-    // Modify database row
-    $query = "DELETE from subscribers WHERE id = 1";
+        $statement = $db->prepare($query);
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        $statement->closeCursor();
 
-    $statement = $db->prepare($query);
-    $statement->execute();
-    $statement->closeCursor();
-
-
-    // Display subscriber records
-    require 'select.php';
+    }
+   
+   header('Location: index.php');
 
 ?>
