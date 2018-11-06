@@ -15,7 +15,7 @@
     */
 
     require_once 'log.php';
-    require_once 'subscriber.php';
+    require_once 'album.php';
     require_once 'views.php';
 
 
