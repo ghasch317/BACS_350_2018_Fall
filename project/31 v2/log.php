@@ -1,18 +1,13 @@
 <?php
-
     /* ----------------------------------------------
         This code shows how to hook up a logging utility.
-
         usage:
             $text_message = "This text message";
             require_once 'log.php';
             $log->log($text_message);
             
             $log->show_log();
-
-
         SQL Database table
-
             // Create table log: date, text
             CREATE TABLE log (
               id int(3) NOT NULL AUTO_INCREMENT,
@@ -20,10 +15,7 @@
               text varchar(100) NOT NULL,
               PRIMARY KEY (id)
             );
-
     ---------------------------------------------- */
-
-
     /* ----------------------------------------------
         Data - CRUD Operations
         
@@ -32,11 +24,8 @@
         UPDATE
         DELETE - clear_log($db)
     ---------------------------------------------- */
-
-
     // Add a new record
     function add_log($db, $text) {
-
         // Show if insert is successful or not
         try {
             // Create a string for "now"
@@ -57,8 +46,6 @@
             die();
         }
     }
-
-
     // Delete all database rows
     function clear_log($db) {
         
@@ -74,19 +61,13 @@
         }
         
     }
-
-
     // Query for all log
     function query_log ($db) {
-
         $query = "SELECT * FROM log";
         $statement = $db->prepare($query);
         $statement->execute();
         return $statement->fetchAll();
-
     }
-
-
     /* ----------------------------------------------
         Views
         
@@ -95,8 +76,6 @@
         UPDATE (none)
         DELETE (none)
     ---------------------------------------------- */
-
-
     // add_log_form -- Create an HTML form to add record.
     function add_log_form($page) {
         
@@ -115,20 +94,16 @@
             ';
         
     }
-
-
     // render_list -- Loop over all of the log to make a bullet list
     function render_history($list) {
         $text = '<h3>Application History</h3><ul>';
         foreach ($list as $s) {
-            $text .= '<li>' . $s['id'] . ', ' . $s['date'] . ', ' . $s['text'] . '</li>';
+            $text .= '<li>' . $s['date'] . ' -- ' . $s['text'] . '</li>';
         }
         $text .= '</ul>';
         return $text;     
     }
-
     
-
     /* ----------------------------------------------
         Controller
         
@@ -146,18 +121,13 @@
     ---------------------------------------------- */
     
     require_once 'db.php';
-
-
     // My log list
     class Log {
-
         // Database connection
         private $db;
-
         function __construct($db) {
             $this->db =  $db;
         }
-
         
         // CRUD
         function query() {
@@ -202,10 +172,6 @@
             return add_log_form($page);
         }
     }
-
-
     // Create a list object and connect to the database
     $log = new Log($db);
-
-
 ?>

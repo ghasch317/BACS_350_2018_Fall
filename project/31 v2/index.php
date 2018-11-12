@@ -3,29 +3,21 @@
     require_once 'log.php';
     require_once 'views.php';
     require_once 'auth.php';
-
-
     // Log the page load
     $log->log_page();
-
-
     // Display the page content
-    $content = render_button('Templates', 'http://unco-bacs.org/bacs_350');
-    $content .= render_button('Solutions', 'http://unco-bacs.org/bacs_350');
+    $content = render_button('Home', 'index.php');
     $content .= render_button('Show Log', 'pagelog.php');
-
-    // Try this login
-
-    $email = "me@here.com";
-    $password = 'Rock on dude!';
-
-    // User Setup:
-    // require_once 'db.php';
-    // register_user($db, $email, $password, 'New', 'User');
-        
-    $content .= $auth->show_valid ($email, $password);
-
-
+    $content .= user_info();
+    $content .= '
+    <h2>Public Page</h2>
+    <p>
+        This solution demonstrates the use of authentication code.
+        Visiting this page does not require a login.
+        <a href="private.php">Private Page</a>
+    </p>
+    ';
+    
     // Create main part of page content
     $settings = array(
         "site_title" => "System Admins",
@@ -33,7 +25,5 @@
         "logo"       => "Bear.png",
         "style"      => 'style.css',
         "content"    => $content);
-
     echo render_page($settings);
-
 ?>

@@ -1,5 +1,4 @@
 <?php
-
 /*
     General database connection.  This design works for either local or remote
     database connections.  It automatically determines which is needed at 
@@ -9,34 +8,24 @@
         require_once 'db.php';
         
 */
-
-
     // Connect to the remote database
     function remote_connect() {
-
         $port = '3306';
         $dbname = 'ghaschba_admin';
         $db_connect = "mysql:host=localhost:$port;dbname=$dbname";
         $username = 'ghaschba_350';
         $password = 'Winogrd123!!';
         return db_connect($db_connect, $username, $password);
-
     }
-
-
     // Local Host Database settings
     function local_connect() {
-
         $host = 'localhost';
         $dbname = 'bacs350';
         $username = 'root';
         $password = '';
         $db_connect = "mysql:host=$host;dbname=$dbname";
         return db_connect($db_connect, $username, $password);
-
     }
-
-
     // Open the database or die
     function db_connect($db_connect, $username, $password) {
         
@@ -51,10 +40,7 @@
             echo "<p>Error: $error_message</p>";
             die();
         }
-
     }
-
-
     // Open the database or die
     function connect_database() {
         
@@ -67,9 +53,6 @@
         }
         
     }
-
     // Create a connection
-
     $db = connect_database();
-
 ?>
