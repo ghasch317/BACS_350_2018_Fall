@@ -14,7 +14,7 @@
                     <meta charset="UTF-8">
                     <title>' . $page_title . '</title>
 
-                    <link rel="stylesheet" href="style.css">
+                    <link rel="stylesheet" href="darktheme.css">
 
                 </head>
                 <body>
