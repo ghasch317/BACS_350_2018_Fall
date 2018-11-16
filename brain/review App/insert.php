@@ -14,7 +14,7 @@
 
 
     // Add record
-    if ($album->add($dates, $reviewer, $pageurl, $scorecard, $score)) 
+    if ($review->add($reviewer, $pageurl, $scorecard, $score)) 
     {
         header("Location: index.php");
         echo 'Insertion Success';

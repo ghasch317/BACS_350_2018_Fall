@@ -21,7 +21,7 @@
                 <p><textarea name="scorecard" id="textbox" rows = "10" cols = "40" name="scorecard" id="textbox"></textarea></p>
                 <p><label>Final Score out of 10:</label> &nbsp;
                 <p><textarea name="score" id="textbox" rows = "1" cols = "3"></textarea></p>
-                <p><input type="submit" value="Enter Album"/></p>
+                <p><input type="submit" value="Enter Review"/></p>
                 </form>
             </div>
             ';
@@ -42,7 +42,7 @@
             echo '<div class="card">';
             echo'<h1>' . $s['reviewer'] . '</h1>';
             //echo '<img src="'. $s['pageurl'] .'" width = 500 height = 500 alt="PageURL"/>';
-            echo'<p>' . $s['dates'] . ', ' .'<a href="'. $s['pageurl'] .'">Reviwers Email</a>'. ', ' . $s['reviewer'] . ', ' . $s['scorecard'] . $s['score'] .'</p>';
+            echo'<p>' .'<a href="'. $s['pageurl'] .'">Reviwers Email</a>'. ', ' . $s['reviewer'] . ', ' . $s['scorecard'] . ', '.  $s['score'] .'</p>';
             echo '
             </div>';
         }

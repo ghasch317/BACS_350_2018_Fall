@@ -44,7 +44,7 @@
     }
 
     // Open the database or die
-    function album_connect() {
+    function review_connect() {
         
         $local = ($_SERVER['SERVER_NAME'] == 'localhost');
         if ($local) {

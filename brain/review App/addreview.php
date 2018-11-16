@@ -26,7 +26,7 @@
    
 
     // Show the add form
-    $album->add_form();
+    $review->add_form();
 
     
 
